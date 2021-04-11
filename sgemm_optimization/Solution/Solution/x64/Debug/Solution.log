@@ -1,0 +1,7 @@
+﻿  Compiling CUDA source file ..\..\sgemm.cu...
+  
+  D:\github\dive_inside_cuda\01_sgemm_optimization\Solution\Solution>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\sgemm.cu.obj "D:\github\dive_inside_cuda\01_sgemm_optimization\sgemm.cu" 
+  sgemm.cu
+D:/github/dive_inside_cuda/01_sgemm_optimization/sgemm.cu(92): warning C4305: 'initializing': truncation from 'double' to 'float'
+     Creating library D:\github\dive_inside_cuda\01_sgemm_optimization\Solution\x64\Debug\Solution.lib and object D:\github\dive_inside_cuda\01_sgemm_optimization\Solution\x64\Debug\Solution.exp
+  Solution.vcxproj -> D:\github\dive_inside_cuda\01_sgemm_optimization\Solution\x64\Debug\Solution.exe
