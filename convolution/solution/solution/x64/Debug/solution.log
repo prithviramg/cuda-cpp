@@ -1,0 +1,11 @@
+﻿  Compiling CUDA source file ..\..\convolution_kernels.cu...
+  
+  D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\solution\solution>"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\bin\nvcc.exe" -gencode=arch=compute_52,code=\"sm_52,compute_52\" --use-local-env -ccbin "C:\Program Files (x86)\Microsoft Visual Studio\2019\Community\VC\Tools\MSVC\14.26.28801\bin\HostX86\x64" -x cu   -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include" -I"C:\Program Files\NVIDIA GPU Computing Toolkit\CUDA\v11.2\include"  -G   --keep-dir x64\Debug  -maxrregcount=0  --machine 64 --compile -cudart static  -g  -DWIN32 -DWIN64 -D_DEBUG -D_CONSOLE -D_MBCS -Xcompiler "/EHsc /W3 /nologo /Od /Fdx64\Debug\vc142.pdb /FS /Zi /RTC1 /MDd " -o x64\Debug\convolution_kernels.cu.obj "D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\convolution_kernels.cu" 
+  convolution_kernels.cu
+  convolution.cpp
+  miscellaneous.cpp
+D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\miscellaneous.cpp(40,33): warning C4305: 'initializing': truncation from 'double' to 'float'
+  Generating Code...
+miscellaneous.obj : error LNK2005: "float * c_filter" (?c_filter@@3PAMA) already defined in convolution.obj
+     Creating library D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\solution\x64\Debug\solution.lib and object D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\solution\x64\Debug\solution.exp
+D:\github\Learn-CUDA-Programming\07_parallel_programming_pattern\02_convolution\solution\x64\Debug\solution.exe : fatal error LNK1169: one or more multiply defined symbols found
