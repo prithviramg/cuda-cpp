@@ -66,7 +66,7 @@ __global__ void convolution_kernel_v3(float* device_outputMatrix, float* device_
     int tileSize = BLOCK_DIM + 2 * paddingSize;
 
     extern __shared__ float s_input[];
-
+    // populating the outer boundary with zeros and inner values with image values
     for (int row = 0; row <= tileSize / BLOCK_DIM; row++)
     {
         for (int col = 0; col <= tileSize / BLOCK_DIM; col++)
@@ -85,19 +85,6 @@ __global__ void convolution_kernel_v3(float* device_outputMatrix, float* device_
     }
 
     __syncthreads();
-
-    /* Tile Debugging */
-    // if (index_x == BLOCK_DIM*1 && index_y == BLOCK_DIM*1) 
-    // {
-    //     for (int row = 0; row < 2*paddingSize + BLOCK_DIM; row++)
-    //     {
-    //         for (int col = 0; col < 2*paddingSize + BLOCK_DIM; col++)
-    //         {
-    //             printf("%.0f ", s_input[tileSize * row + col]);
-    //         }
-    //         printf("\n");
-    //     }
-    // }
 
     float convolvedValue = 0.f;
     for (int eachFilterRow = -filterSize / 2; eachFilterRow <= filterSize / 2; ++eachFilterRow)
@@ -124,13 +111,13 @@ void convolutionGPU(int version, float* device_outputMatrix, float* device_input
     dim3 blockDimension(BLOCK_DIM, BLOCK_DIM);
     dim3 gridDimension((imageColumns + BLOCK_DIM - 1) / BLOCK_DIM, (imageRows + BLOCK_DIM - 1) / BLOCK_DIM);
     if (version == 1)
-        convolution_kernel_v1 << <gridDimension, blockDimension >> > (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
+        convolution_kernel_v1 <<<gridDimension, blockDimension >>> (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
     else if (version == 2)
-        convolution_kernel_v2 << <gridDimension, blockDimension >> > (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
+        convolution_kernel_v2 <<<gridDimension, blockDimension >>> (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
     else // version == 3
     {
         int sharedMemorySize = (2 * filterSize + BLOCK_DIM) * (2 * filterSize + BLOCK_DIM) * sizeof(float);
-        convolution_kernel_v3 << <gridDimension, blockDimension, sharedMemorySize, 0 >> > (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
+        convolution_kernel_v3 <<<gridDimension, blockDimension, sharedMemorySize, 0 >>> (device_outputMatrix, device_inputMatrix, device_filter, imageRows, imageColumns, filterSize);
     }
 
     checkCudaErrors(cudaGetLastError());
